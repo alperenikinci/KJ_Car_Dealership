@@ -26,6 +26,4 @@ public class FuelCar extends Car {
     @Column(name = "fuel_consumption_L/km")
     private Double fuelConsumption;
 
-
-
 }

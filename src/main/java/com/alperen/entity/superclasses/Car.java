@@ -16,6 +16,7 @@ public class Car extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private EBrand brand;
+    @Column(nullable = false)
     private String model;
     @Enumerated(EnumType.STRING)
     private EColor color;
@@ -33,6 +34,7 @@ public class Car extends BaseEntity {
     @Column(name = "top_speed_km/h")
     private Double topSpeed;
     private String carCode;
+    @Enumerated(EnumType.STRING)
     @Builder.Default
-    private Boolean isSold = false;
+    private EStatus status = EStatus.ON_SHOWROOM;
 }

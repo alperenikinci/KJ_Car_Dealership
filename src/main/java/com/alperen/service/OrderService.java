@@ -2,8 +2,12 @@ package com.alperen.service;
 
 import com.alperen.dto.request.OrderRequestDto;
 import com.alperen.entity.Address;
+import com.alperen.entity.Address_Customer;
 import com.alperen.entity.Customer;
 import com.alperen.entity.Order;
+import com.alperen.mapper.AddressMapper;
+import com.alperen.mapper.CustomerMapper;
+import com.alperen.mapper.OrderMapper;
 import com.alperen.repository.OrderRepository;
 import com.alperen.utility.ServiceManager;
 import org.springframework.stereotype.Service;
@@ -13,40 +17,30 @@ public class OrderService extends ServiceManager<Order,Long> {
     private final OrderRepository orderRepository;
     private final CustomerService customerService;
     private final AddressService addressService;
+    private final Address_CustomerService addressCustomerService;
 
-    public OrderService(OrderRepository orderRepository, CustomerService customerService, AddressService addressService) {
+
+    public OrderService(OrderRepository orderRepository, CustomerService customerService, AddressService addressService, Address_CustomerService addressCustomerService) {
         super(orderRepository);
         this.orderRepository = orderRepository;
         this.customerService = customerService;
         this.addressService = addressService;
-
+        this.addressCustomerService = addressCustomerService;
     }
 
     public Order newOrder(OrderRequestDto dto){
-        Address address = Address.builder()
-                .street(dto.getStreet())
-                .city(dto.getCity())
-                .apartmentNo(dto.getApartmentNo())
-                .postalCode(dto.getPostalCode())
-                .country(dto.getCountry())
-                .build();
-        Customer customer = Customer.builder()
-                .buyersName(dto.getBuyersName())
-                .buyersSurname(dto.getBuyersSurname())
-                .countryId(1L)
-                .buyersIdNumber(dto.getBuyersIdNumber())
-                .buyersEmail(dto.getBuyersEmail())
-                .buyersPhoneNumber(dto.getBuyersPhoneNumber())
-                .build();
+        Address address = AddressMapper.INSTANCE.fromOrderRequestToAddress(dto);
+        Customer customer = CustomerMapper.INSTANCE.fromOrderRequestToCustomer(dto);
         customerService.save(customer);
-        addressService.save(address);
-        Order order = Order.builder()
-                .carType(dto.getCarType())
-                .carCode(dto.getCarCode())
-                .customerId(customer.getId())
-                .addressId(address.getId())
-                .transactedAmount(1230948.1)
-                .build();
+        address.setCountryId(1L);
+        addressService.save(address); //TODO Address,countryId düzenlenecek.
+        addressCustomerService.save(Address_Customer.builder()
+                .addressId(address.getId()).customerId(customer.getId()).build());
+        Order order = OrderMapper.INSTANCE.fromOrderRequestToOrder(dto);
+        order.setCustomerId(customer.getId());
+        order.setAddressId(customer.getId());
         return save(order);
     }
+
+    //4 electric, 2 hybrid, 10 ICE car.
 }

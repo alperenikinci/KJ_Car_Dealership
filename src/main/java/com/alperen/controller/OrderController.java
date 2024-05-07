@@ -1,7 +1,9 @@
 package com.alperen.controller;
 
 import com.alperen.dto.request.OrderRequestDto;
+import com.alperen.entity.ElectricCar;
 import com.alperen.entity.Order;
+import com.alperen.entity.superclasses.Car;
 import com.alperen.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,4 +24,6 @@ public class OrderController {
     public ResponseEntity<Order> newOrder(@RequestBody @Valid OrderRequestDto dto){
     return ResponseEntity.ok(orderService.newOrder(dto));
     }
+
+
 }

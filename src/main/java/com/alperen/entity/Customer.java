@@ -3,13 +3,11 @@ package com.alperen.entity;
 import com.alperen.entity.superclasses.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -19,14 +17,13 @@ public class Customer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String buyersName;
-    private String buyersSurname;
-    private Long countryId;
-    private String buyersIdNumber;
+    private String customerName;
+    private String customerSurname;
+    private String customersIdNumber;
     @Email
-    private String buyersEmail;
-    private String buyersPhoneNumber;
+    private String customersEmail;
+    private String customersPhoneNumber;
     @Builder.Default
     private Boolean isCustomerVerified = false;
-    //TODO Address ile Customer arasında normalizasyon yapılacak.
+    //TODO Address ile Customer arasında normalizasyon yapılacak. DONE
 }

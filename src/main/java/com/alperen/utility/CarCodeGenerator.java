@@ -2,19 +2,26 @@ package com.alperen.utility;
 
 import com.alperen.entity.ElectricCar;
 import com.alperen.entity.enums.EBrand;
+import com.alperen.entity.superclasses.Car;
 
 import java.util.*;
 
+//TODO Rename to -> CarCodeGenerator
+public class CarCodeGenerator {
 
-public class ChassisCodeGenerator {
 
+    public static String generateCarCode(String batchNumber, Car car) {
 
-    public static String generateCarCode(String batchNumber, EBrand brand, String model) {
-        String initials = brand.getInitials();
-        String modelInitials = model.toUpperCase().substring(0, 2);
+        String initials = car.getBrand().getInitials();
+        String modelInitials = null;
+        if (car.getModel().length() == 1) {
+            modelInitials = (car.getModel() + car.getModel()).toUpperCase();
+        } else {
+            modelInitials = car.getModel().toUpperCase().substring(0, 2);
+        }
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(initials + "-" + modelInitials+"-");
+        stringBuilder.append(initials + "-" + modelInitials + "-");
         stringBuilder.append(batchNumber);
         stringBuilder.append("-");
         stringBuilder.append(generateCode());
@@ -33,7 +40,6 @@ public class ChassisCodeGenerator {
     public static String generateBatchNumber() {
         UUID uuid = UUID.randomUUID();
         String uniqueCode = uuid.toString().replaceAll("-", "").toUpperCase();
-
         char[] charArr = new char[2];
         int charIndex = 0;
         for (int i = 0; i < uniqueCode.length(); i++) {

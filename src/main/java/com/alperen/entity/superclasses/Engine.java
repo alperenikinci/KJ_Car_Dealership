@@ -1,5 +1,6 @@
 package com.alperen.entity.superclasses;
 
+import com.alperen.entity.enums.EBrand;
 import com.alperen.entity.enums.EFuelType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,10 +17,13 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass
 public class Engine extends BaseEntity {
 
+    private String name;
     @Column(name = "horse_power_hp")
     private Long horsePower;
     @Column(name = "torque_Nm")
     private Double torque;
     private EFuelType fuelType;
+    private EBrand brand;
+
 
 }

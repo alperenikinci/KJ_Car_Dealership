@@ -3,7 +3,6 @@ package com.alperen.entity;
 import com.alperen.entity.enums.ECarType;
 import com.alperen.entity.superclasses.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
