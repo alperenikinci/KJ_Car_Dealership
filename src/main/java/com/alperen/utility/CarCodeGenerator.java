@@ -20,11 +20,13 @@ public class CarCodeGenerator {
             modelInitials = car.getModel().toUpperCase().substring(0, 2);
         }
 
+        String carType = car.getClass().getSimpleName().substring(0,1);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(initials + "-" + modelInitials + "-");
         stringBuilder.append(batchNumber);
         stringBuilder.append("-");
         stringBuilder.append(generateCode());
+        stringBuilder.append("-Y-"+car.getYear()+"-"+carType);
 
         return stringBuilder.toString();
     }
@@ -34,13 +36,13 @@ public class CarCodeGenerator {
         // UUID'yi al ve '-' karakterlerini kaldır
         String uniqueCode = uuid.toString().replaceAll("-", "");
         // 50 karakterlik bir kısmını al, daha fazla karakter varsa kırp
-        return uniqueCode.substring(0, 20).toUpperCase();
+        return uniqueCode.substring(0, 8).toUpperCase();
     }
 
     public static String generateBatchNumber() {
         UUID uuid = UUID.randomUUID();
         String uniqueCode = uuid.toString().replaceAll("-", "").toUpperCase();
-        char[] charArr = new char[2];
+        char[] charArr = new char[6];
         int charIndex = 0;
         for (int i = 0; i < uniqueCode.length(); i++) {
             int asciiValue = uniqueCode.charAt(i);
@@ -48,10 +50,14 @@ public class CarCodeGenerator {
                 charArr[charIndex] = (char) asciiValue;
                 charIndex++;
             }
-            if (charIndex == 2) {
+            if (charIndex == 4) {
                 break;
             }
         }
+        Random random = new Random();
+        String batchNumbers = String.valueOf(random.nextInt(10, 100));
+        charArr[4] = batchNumbers.charAt(0);
+        charArr[5] = batchNumbers.charAt(1);
         return String.valueOf(charArr);
     }
 }
