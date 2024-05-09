@@ -26,8 +26,5 @@ public class CarController {
     public ResponseEntity<List<Car>> createCars(@RequestBody @Valid List<CarCreateRequestDto> dto){
         return ResponseEntity.ok(carService.createCars(dto));
     }
-//    @PostMapping("/electic-car/createCars")
-//    public ResponseEntity<List<ElectricCar>> createElectricCars(@RequestBody @Valid List<ElectricCarCreateRequestDto> dtoList){
-//        return ResponseEntity.ok(carService.createElectricCars(dtoList));
-//    }
+
 }

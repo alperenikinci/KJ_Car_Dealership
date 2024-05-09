@@ -13,6 +13,7 @@ import com.alperen.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HybridCarService extends ServiceManager<HybridCar,Long> {
@@ -28,6 +29,10 @@ public class HybridCarService extends ServiceManager<HybridCar,Long> {
         String batchNumber = CarCodeGenerator.generateBatchNumber();
         hybridCarList.forEach(car -> car.setCarCode(CarCodeGenerator.generateCarCode(batchNumber,car)));
         return (List<HybridCar>) saveAll(hybridCarList);
+    }
+
+    public Optional<HybridCar> findByCarCode(String carCode){
+        return hybridCarRepository.findByCarCode(carCode);
     }
 }
 

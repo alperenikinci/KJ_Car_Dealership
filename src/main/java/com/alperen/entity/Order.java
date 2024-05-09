@@ -19,8 +19,9 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String carCode;
+    @Enumerated(EnumType.STRING)
     private ECarType carType;
-    private Long customerId;
+    private Long addressCustomerId;
     //TODO DTO'da bunlar verilecek.
 //    private String buyersName;
 //    private String buyersSurname;
@@ -28,24 +29,11 @@ public class Order extends BaseEntity {
 //    @Email
 //    private String buyersEmail;
 //    private String buyersPhoneNumber;
-    private Double transactedAmount;
+    private Double remainingAmount;
     @Builder.Default
-    private Boolean isTransactionCompleted = false;
+    private Boolean isOrderCompleted = false;
+    @Builder.Default
+    private Boolean isPreOrderCompleted = false;
 
-    private Long addressId;
-    //TODO DTO'da bunlar verilecek.
-//    @Column(nullable = false)
-//    private String street;
-//
-//    @Column(nullable = false)
-//    private String city;
-//
-//    @Column(nullable = false)
-//    private String apartmentNo;
-//
-//    @Column(nullable = false)
-//    private String postalCode;
-//
-//    @Column(nullable = false)
-//    private String country;
+
 }

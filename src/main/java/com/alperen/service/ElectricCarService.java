@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ElectricCarService extends ServiceManager<ElectricCar,Long> {
@@ -43,6 +44,10 @@ public class ElectricCarService extends ServiceManager<ElectricCar,Long> {
         String batchNumber = CarCodeGenerator.generateBatchNumber();
         electricCarList.forEach(car -> car.setCarCode(CarCodeGenerator.generateCarCode(batchNumber,car)));
         return (List<ElectricCar>) saveAll(electricCarList);
+    }
+
+    public Optional<ElectricCar> findByCarCode(String carCode){
+        return electricCarRepository.findByCarCode(carCode);
     }
 }
 

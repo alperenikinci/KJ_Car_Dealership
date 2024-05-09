@@ -2,10 +2,7 @@ package com.alperen.utility;
 
 import com.alperen.entity.*;
 import com.alperen.entity.enums.*;
-import com.alperen.service.ElectricCarService;
-import com.alperen.service.ElectricEngineService;
-import com.alperen.service.FuelCarService;
-import com.alperen.service.InternalCombustionEngineService;
+import com.alperen.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -21,13 +18,14 @@ public class DataImpl implements ApplicationRunner {
     private final InternalCombustionEngineService internalCombustionEngineService;
     private final FuelCarService fuelCarService;
     private final ElectricCarService electricCarService;
-
+    private final CountryService countryService;
     @Override
     public void run(ApplicationArguments args) throws Exception {
         createElectricEngines();
         createFuelEngines();
         createFuelCars();
         createElectricCars();
+        createCountries();
     }
 
     public void createElectricCars() {
@@ -1848,5 +1846,149 @@ public class DataImpl implements ApplicationRunner {
         engineList.addAll(List.of(fordEcoboostEngine, bmwB58Engine, mercedesM256Engine, audiEA888Engine, subaruEJ25Engine, porsche9A2Engine, toyota2JZEngine, hondaK20CEngine, volkswagenEA888Engine, chevroletLT1Engine, nissanVR38DETTEngine, ferrariF154Engine, lamborghiniV12Engine, mclarenM840TEngine, bugattiW16Engine, astonMartinAMGV8Engine, rollsRoyceV12Engine, bentleyW12Engine, maseratiNettunoV6Engine, alfaRomeoV6Engine));
         internalCombustionEngineService.saveAll(engineList);
     }
+
     //TODO HYBRID ENGINE YAPILACAK.
+    public  void createCountries() {
+        List<Country> europeanCountries = new ArrayList<>();
+
+        europeanCountries.add(Country.builder()
+                .name("Germany")
+                .isoCode("DE")
+                .capital("Berlin")
+                .continent("Europe")
+                .region("Western Europe")
+                .build());
+
+        europeanCountries.add(Country.builder()
+                .name("France")
+                .isoCode("FR")
+                .capital("Paris")
+                .continent("Europe")
+                .region("Western Europe")
+                .build());
+
+        europeanCountries.add(Country.builder()
+                .name("United Kingdom")
+                .isoCode("GB")
+                .capital("London")
+                .continent("Europe")
+                .region("Northern Europe")
+                .build());
+
+        europeanCountries.add(Country.builder()
+                .name("Italy")
+                .isoCode("IT")
+                .capital("Rome")
+                .continent("Europe")
+                .region("Southern Europe")
+                .build());
+
+        europeanCountries.add(Country.builder()
+                .name("Spain")
+                .isoCode("ES")
+                .capital("Madrid")
+                .continent("Europe")
+                .region("Southern Europe")
+                .build());
+
+        List<Country> secondaryEuropeanCountries = new ArrayList<>();
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Greece")
+                .isoCode("GR")
+                .capital("Athens")
+                .continent("Europe")
+                .region("Southern Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Poland")
+                .isoCode("PL")
+                .capital("Warsaw")
+                .continent("Europe")
+                .region("Eastern Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Sweden")
+                .isoCode("SE")
+                .capital("Stockholm")
+                .continent("Europe")
+                .region("Northern Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Portugal")
+                .isoCode("PT")
+                .capital("Lisbon")
+                .continent("Europe")
+                .region("Southern Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Netherlands")
+                .isoCode("NL")
+                .capital("Amsterdam")
+                .continent("Europe")
+                .region("Western Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Belgium")
+                .isoCode("BE")
+                .capital("Brussels")
+                .continent("Europe")
+                .region("Western Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Switzerland")
+                .isoCode("CH")
+                .capital("Bern")
+                .continent("Europe")
+                .region("Central Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Austria")
+                .isoCode("AT")
+                .capital("Vienna")
+                .continent("Europe")
+                .region("Central Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Czech Republic")
+                .isoCode("CZ")
+                .capital("Prague")
+                .continent("Europe")
+                .region("Eastern Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Hungary")
+                .isoCode("HU")
+                .capital("Budapest")
+                .continent("Europe")
+                .region("Eastern Europe")
+                .build());
+
+        secondaryEuropeanCountries.add(Country.builder()
+                .name("Turkey")
+                .isoCode("TR")
+                .capital("Ankara")
+                .continent("Asia")
+                .region("Middle East")
+                .build());
+
+
+        // Diğer ikincil Avrupa ülkeleri buraya eklenebilir
+
+        countryService.saveAll(secondaryEuropeanCountries);
+        countryService.saveAll(europeanCountries);
+    }
 }
+
+
+
+

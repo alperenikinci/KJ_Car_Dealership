@@ -7,6 +7,8 @@ import com.alperen.repository.Address_CustomerRepository;
 import com.alperen.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class Address_CustomerService extends ServiceManager<Address_Customer,Long> {
 
@@ -15,6 +17,15 @@ public class Address_CustomerService extends ServiceManager<Address_Customer,Lon
         super(addressCustomerRepository);
         this.addressCustomerRepository = addressCustomerRepository;
     }
+
+    public Optional<Address_Customer> findByAddressIdAndCustomerId(Long addressId, Long customerId){
+        return addressCustomerRepository.findByAddressIdAndCustomerId(addressId,customerId);
+    }
+
+    public Boolean doesAddressCustomerExists(Address_Customer addressCustomer){
+        return addressCustomerRepository.existsByAddressIdAndCustomerId(addressCustomer.getAddressId(),addressCustomer.getCustomerId());
+    }
+
 
 
 

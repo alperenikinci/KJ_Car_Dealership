@@ -19,11 +19,10 @@ public class Customer extends BaseEntity {
     private Long id;
     private String customerName;
     private String customerSurname;
-    private String customersIdNumber;
+    private String customerCitizenshipId;
     @Email
     private String customersEmail;
     private String customersPhoneNumber;
     @Builder.Default
     private Boolean isCustomerVerified = false;
-    //TODO Address ile Customer arasında normalizasyon yapılacak. DONE
 }

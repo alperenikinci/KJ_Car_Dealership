@@ -10,16 +10,14 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@Table(name = "tbl_address_customer")
 @Entity
-public class Address_Customer extends BaseEntity {
+@Table(name = "tbl_payment_info")
+public class PaymentInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private Long addressId;
-    @Column(nullable = false)
-    private Long customerId;
+    private Long creditCardId;
+    private Long orderId;
+    private Double paymentAmount;
 }
