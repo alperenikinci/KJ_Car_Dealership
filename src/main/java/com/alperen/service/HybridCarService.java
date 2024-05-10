@@ -4,6 +4,8 @@ import com.alperen.dto.request.CarCreateRequestDto;
 import com.alperen.entity.ElectricCar;
 import com.alperen.entity.FuelCar;
 import com.alperen.entity.HybridCar;
+import com.alperen.exception.CarDealershipException;
+import com.alperen.exception.ErrorType;
 import com.alperen.mapper.ElectricCarMapper;
 import com.alperen.mapper.HybridCarMapper;
 import com.alperen.repository.FuelCarRepository;
@@ -32,7 +34,12 @@ public class HybridCarService extends ServiceManager<HybridCar,Long> {
     }
 
     public Optional<HybridCar> findByCarCode(String carCode){
-        return hybridCarRepository.findByCarCode(carCode);
+        try {
+            return hybridCarRepository.findByCarCode(carCode);
+        } catch (Exception e){
+            throw new CarDealershipException(ErrorType.CAR_NOT_FOUND);
+        }
+
     }
 }
 

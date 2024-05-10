@@ -25,10 +25,20 @@ public class CustomerService extends ServiceManager<Customer,Long> {
         return customerRepository.findOptionalByCustomerCitizenshipId(customerCitizenshipId);
     }
 
-    public Boolean doesCustomerExist(Customer customer) {
+    private Boolean doesCustomerExist(Customer customer) {
         return customerRepository.existsByCustomerNameAndCustomerSurnameAndCustomerCitizenshipIdAndCustomersEmailAndCustomersPhoneNumber(
                 customer.getCustomerName(), customer.getCustomerSurname(), customer.getCustomerCitizenshipId(),
                 customer.getCustomersEmail(), customer.getCustomersPhoneNumber());
+    }
+
+    public Customer saveAndVerifyCustomerIfNotExists(Customer customer){
+        if (!doesCustomerExist(customer)) {
+            save(customer);
+        } else {
+            customer =findByCustomerCitizenshipId(customer.getCustomerCitizenshipId()).get();
+        }
+        customer.setIsCustomerVerified(true);
+        return customer;
     }
 
 

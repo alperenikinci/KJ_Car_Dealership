@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
 
     Optional<Customer> findOptionalByCustomerCitizenshipId(String customerCitizenshipId);
-    boolean existsByCustomerNameAndCustomerSurnameAndCustomerCitizenshipIdAndCustomersEmailAndCustomersPhoneNumber(
+    Boolean existsByCustomerNameAndCustomerSurnameAndCustomerCitizenshipIdAndCustomersEmailAndCustomersPhoneNumber(
             String customerName, String customerSurname, String customerCitizenshipId,
             String customersEmail, String customersPhoneNumber);
 

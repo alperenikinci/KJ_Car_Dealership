@@ -14,3 +14,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 11MB
+      max-request-size: 11MB
+imgur:
+  client:
+    id: ${kj_imgur_client_id}

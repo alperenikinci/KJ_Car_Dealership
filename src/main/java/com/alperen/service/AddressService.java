@@ -23,10 +23,19 @@ public class AddressService extends ServiceManager<Address,Long> {
                 address.getPostalCode(), address.getCountryId());
     }
 
-    public Optional<Address> findDuplicateAddress(Address address) {
+    private Optional<Address> findDuplicateAddress(Address address) {
         return addressRepository.findByStreetAndCityAndApartmentNoAndPostalCodeAndCountryId(
                 address.getStreet(), address.getCity(), address.getApartmentNo(),
                 address.getPostalCode(), address.getCountryId());
+    }
+
+    public Address saveAddressIfNotExists(Address address){
+        if (!doesAddressExist(address)) {
+            save(address);
+        } else {
+            address = findDuplicateAddress(address).get();
+        }
+        return address;
     }
 
 

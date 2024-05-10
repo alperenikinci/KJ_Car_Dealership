@@ -20,6 +20,6 @@ public class Image extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String imageUrl;
-    private Long carId;
+    private String carCode;
 
 }

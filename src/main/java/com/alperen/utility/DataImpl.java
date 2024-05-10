@@ -1,8 +1,12 @@
 package com.alperen.utility;
 
+import com.alperen.dto.request.ImageCreateRequestDto;
 import com.alperen.entity.*;
 import com.alperen.entity.enums.*;
+import com.alperen.entity.superclasses.Car;
 import com.alperen.service.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -23,13 +28,13 @@ public class DataImpl implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         createElectricEngines();
         createFuelEngines();
+        createElectricCars();
         createFuelCars();
         createElectricCars();
         createCountries();
     }
-
-    public void createElectricCars() {
-        List<ElectricCar> electricCars = new ArrayList<>();
+    public  List<Car> createElectricCars() {
+        List<Car> carList = new ArrayList<>();
 
 // Ford Mustang Mach-E
         ElectricCar fordMustangMachE = ElectricCar.builder()
@@ -48,7 +53,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(1000.0)
                 .energyConsumption(18.0)
                 .build();
-        electricCars.add(fordMustangMachE);
+        carList.add(fordMustangMachE);
 
 // Kia Soul EV
         ElectricCar kiaSoulEV = ElectricCar.builder()
@@ -67,7 +72,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(500.0)
                 .energyConsumption(16.0)
                 .build();
-        electricCars.add(kiaSoulEV);
+        carList.add(kiaSoulEV);
 
 // Mini Cooper SE
         ElectricCar miniCooperSE = ElectricCar.builder()
@@ -86,7 +91,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(400.0)
                 .energyConsumption(14.0)
                 .build();
-        electricCars.add(miniCooperSE);
+        carList.add(miniCooperSE);
 
 // Polestar 2
         ElectricCar polestar2 = ElectricCar.builder()
@@ -105,7 +110,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(600.0)
                 .energyConsumption(20.0)
                 .build();
-        electricCars.add(polestar2);
+        carList.add(polestar2);
 
 // Rivian R1T
         ElectricCar rivianR1T = ElectricCar.builder()
@@ -124,7 +129,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(800.0)
                 .energyConsumption(25.0)
                 .build();
-        electricCars.add(rivianR1T);
+        carList.add(rivianR1T);
 
 // Rivian R1S
         ElectricCar rivianR1S = ElectricCar.builder()
@@ -143,7 +148,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(900.0)
                 .energyConsumption(27.0)
                 .build();
-        electricCars.add(rivianR1S);
+        carList.add(rivianR1S);
 
 // Lucid Air
         ElectricCar lucidAir = ElectricCar.builder()
@@ -162,7 +167,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(1000.0)
                 .energyConsumption(22.0)
                 .build();
-        electricCars.add(lucidAir);
+        carList.add(lucidAir);
 
 // GMC Hummer EV
         ElectricCar gmcHummerEV = ElectricCar.builder()
@@ -181,7 +186,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(1200.0)
                 .energyConsumption(30.0)
                 .build();
-        electricCars.add(gmcHummerEV);
+        carList.add(gmcHummerEV);
 
 // Volkswagen ID.3
         ElectricCar volkswagenID3 = ElectricCar.builder()
@@ -200,7 +205,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(700.0)
                 .energyConsumption(15.0)
                 .build();
-        electricCars.add(volkswagenID3);
+        carList.add(volkswagenID3);
 
 // Nissan Ariya
         ElectricCar nissanAriya = ElectricCar.builder()
@@ -219,7 +224,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(800.0)
                 .energyConsumption(20.0)
                 .build();
-        electricCars.add(nissanAriya);
+        carList.add(nissanAriya);
 
 // Tesla Model S
         ElectricCar teslaModelS = ElectricCar.builder()
@@ -238,7 +243,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(1000.0)
                 .energyConsumption(25.0)
                 .build();
-        electricCars.add(teslaModelS);
+        carList.add(teslaModelS);
 
 // Audi e-tron
         ElectricCar audiEtron = ElectricCar.builder()
@@ -257,7 +262,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(900.0)
                 .energyConsumption(23.0)
                 .build();
-        electricCars.add(audiEtron);
+        carList.add(audiEtron);
 
 // Jaguar I-PACE
         ElectricCar jaguarIPace = ElectricCar.builder()
@@ -276,7 +281,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(1000.0)
                 .energyConsumption(26.0)
                 .build();
-        electricCars.add(jaguarIPace);
+        carList.add(jaguarIPace);
 
 // BMW i3
         ElectricCar bmwi3 = ElectricCar.builder()
@@ -295,7 +300,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(700.0)
                 .energyConsumption(18.0)
                 .build();
-        electricCars.add(bmwi3);
+        carList.add(bmwi3);
 
 // Nissan Leaf
         ElectricCar nissanLeaf = ElectricCar.builder()
@@ -314,7 +319,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(600.0)
                 .energyConsumption(14.0)
                 .build();
-        electricCars.add(nissanLeaf);
+        carList.add(nissanLeaf);
 
 // Mercedes-Benz EQC
         ElectricCar mercedesEQC = ElectricCar.builder()
@@ -333,7 +338,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(900.0)
                 .energyConsumption(23.0)
                 .build();
-        electricCars.add(mercedesEQC);
+        carList.add(mercedesEQC);
 
 // Porsche Taycan
         ElectricCar porscheTaycan = ElectricCar.builder()
@@ -352,7 +357,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(1000.0)
                 .energyConsumption(28.0)
                 .build();
-        electricCars.add(porscheTaycan);
+        carList.add(porscheTaycan);
 
 // Volkswagen ID.4
         ElectricCar volkswagenID4 = ElectricCar.builder()
@@ -371,7 +376,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(800.0)
                 .energyConsumption(20.0)
                 .build();
-        electricCars.add(volkswagenID4);
+        carList.add(volkswagenID4);
 
 // Hyundai Kona Electric
         ElectricCar hyundaiKona = ElectricCar.builder()
@@ -390,7 +395,7 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(700.0)
                 .energyConsumption(17.0)
                 .build();
-        electricCars.add(hyundaiKona);
+        carList.add(hyundaiKona);
 
 // Chevrolet Bolt EV
         ElectricCar chevroletBoltEV = ElectricCar.builder()
@@ -409,12 +414,13 @@ public class DataImpl implements ApplicationRunner {
                 .batteryCapacity(600.0)
                 .energyConsumption(15.0)
                 .build();
-        electricCars.add(chevroletBoltEV);
+        carList.add(chevroletBoltEV);
 
-        electricCars.stream().forEach(x -> x.setCarCode(CarCodeGenerator.generateCarCode(CarCodeGenerator.generateBatchNumber(), x)));
-
-
-        electricCarService.saveAll(electricCars);
+        carList.stream().forEach(x -> x.setCarCode(CarCodeGenerator.generateCarCode(CarCodeGenerator.generateBatchNumber(), x)));
+        List<ElectricCar> electricCarList = carList.stream().map(x->(ElectricCar) x).collect(Collectors.toList());
+        electricCarList = (List<ElectricCar>) electricCarService.saveAll(electricCarList);
+        carList =  electricCarList.stream().map(x-> (Car) x).collect(Collectors.toList());;
+        return  carList;
 
     }
 

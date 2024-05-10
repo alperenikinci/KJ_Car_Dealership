@@ -59,7 +59,7 @@ public class CarService {
     }
 
     public Optional<Car> findByCarCode(ECarType carType, String carCode) {
-
+    try {
         if (carType.toString().equals("ELECTRIC")) {
             return Optional.of(electricCarService.findByCarCode(carCode).get());
         } else if (carType.toString().equals("HYBRID")) {
@@ -69,6 +69,10 @@ public class CarService {
         } else {
             throw new CarDealershipException(ErrorType.CAR_NOT_FOUND);
         }
+    } catch (Exception e){
+        throw new CarDealershipException(ErrorType.CAR_NOT_FOUND);
+    }
+
     }
 
     public Optional<Car> updateCarStatus(Car car){

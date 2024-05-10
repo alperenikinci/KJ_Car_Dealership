@@ -31,9 +31,11 @@ public class Order extends BaseEntity {
 //    private String buyersPhoneNumber;
     private Double remainingAmount;
     @Builder.Default
-    private Boolean isOrderCompleted = false;
+    private Boolean isDeliveryCompleted = false;
     @Builder.Default
-    private Boolean isPreOrderCompleted = false;
+    private Boolean isPaymentCompleted = false;
+    @Builder.Default
+    private Boolean isDownPaymentCompleted = false;
 
 
 }

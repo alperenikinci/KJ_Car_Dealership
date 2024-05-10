@@ -1,6 +1,7 @@
 package com.alperen.mapper;
 
 import com.alperen.dto.request.OrderRequestDto;
+import com.alperen.dto.request.PaymentRequestDto;
 import com.alperen.entity.CreditCardInfo;
 import com.alperen.entity.PaymentInfo;
 import org.mapstruct.Mapper;
@@ -13,4 +14,5 @@ public interface PaymentInfoMapper {
     PaymentInfoMapper INSTANCE = Mappers.getMapper(PaymentInfoMapper.class);
 
     PaymentInfo fromOrderRequestToPaymentInfo(final OrderRequestDto dto);
+    PaymentInfo fromPaymentRequestToPaymentInfo(final PaymentRequestDto dto);
 }

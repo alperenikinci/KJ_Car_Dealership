@@ -21,9 +21,9 @@ public class CreditCardInfo  extends BaseEntity {
     private String ownersName;
     private String ownersSurname;
     @Column(unique = true)
-    @Size(min = 16, max = 16)
+//    @Size(min = 16, max = 16)
     private String creditCardNo;
     private String creditCardExpirationDate;
-    @Size(min = 3,max = 3)
+//    @Size(min = 3,max = 3)
     private String cvc;
 }

@@ -5,6 +5,8 @@ import com.alperen.entity.ElectricCar;
 import com.alperen.entity.ElectricEngine;
 import com.alperen.entity.FuelCar;
 import com.alperen.entity.HybridCar;
+import com.alperen.exception.CarDealershipException;
+import com.alperen.exception.ErrorType;
 import com.alperen.mapper.FuelCarMapper;
 import com.alperen.mapper.HybridCarMapper;
 import com.alperen.repository.ElectricEngineRepository;
@@ -34,7 +36,11 @@ public class FuelCarService extends ServiceManager<FuelCar,Long> {
     }
 
     public Optional<FuelCar> findByCarCode(String carCode){
-        return fuelCarRepository.findByCarCode(carCode);
+        try {
+            return fuelCarRepository.findByCarCode(carCode);
+        } catch (Exception e){
+            throw new CarDealershipException(ErrorType.CAR_NOT_FOUND);
+        }
     }
 }
 
